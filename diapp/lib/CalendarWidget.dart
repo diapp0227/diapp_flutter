@@ -3,8 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalenderWidget extends StatelessWidget {
-  const CalenderWidget({super.key});
+class calendarWidget extends StatelessWidget {
+  const calendarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +14,20 @@ class CalenderWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CalenderPage(title: 'Flutter Demo Home Page'),
+      home: const CalendarPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class CalenderPage extends StatefulWidget {
-  const CalenderPage({super.key, required this.title});
+class CalendarPage extends StatefulWidget {
+  const CalendarPage({super.key, required this.title});
   final String title;
 
   @override
-  State<CalenderPage> createState() => _CalenderPageState();
+  State<CalendarPage> createState() => _CalendarPageState();
 }
 
-class _CalenderPageState extends State<CalenderPage> {
+class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
 
   @override
