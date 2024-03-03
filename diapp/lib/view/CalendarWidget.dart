@@ -4,36 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class calendarWidget extends StatelessWidget {
-  const calendarWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const CalendarPage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key, required this.title});
-
-  final String title;
+  const CalendarPage({super.key});
 
   @override
   State<CalendarPage> createState() => _CalendarPageState();
-}
-
-enum CalendarRowType {
-  // 選択中
-  selected,
-  // 選択外
-  outside
 }
 
 class _CalendarPageState extends State<CalendarPage> {
@@ -94,7 +69,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("カレンダー"),
       ),
       body: Column(
         children: <Widget>[
@@ -186,4 +161,11 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
     );
   }
+}
+
+enum CalendarRowType {
+  // 選択中
+  selected,
+  // 選択外
+  outside
 }
