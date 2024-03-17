@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../model/OnMemory.dart';
+import '../model/data/Diary.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -14,7 +17,9 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  final formatter = DateFormat('yyyy年M月d日');
+  String _memo = "";
+  final formatter = DateFormat('yyyy-MM-dd');
+  OnMemory _onMemory = OnMemory();
 
   // 選択した日付の表示用文字列
   String selectedDateTimeString() {
@@ -64,6 +69,23 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
+  updateDiaryData() {
+    print("updateDiaryData()");
+    DateTime? dateTime = _selectedDay;
+    if (dateTime == null) {
+      reloadViewData(null);
+      return;
+    }
+
+    _onMemory.getDiary(selectedDateTimeString()).then((value) {
+      reloadViewData(value);
+    }) ;
+  }
+
+  reloadViewData(Diary? diary) {
+    _memo = diary?.memo ?? "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +111,8 @@ class _CalendarPageState extends State<CalendarPage> {
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
+                // カレンダー情報を画面更新
+                updateDiaryData();
               });
             },
             onPageChanged: (focusedDay) {
@@ -140,7 +164,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   Container(
                       width: 30,
                       height: 30,
-                      child: Image.asset('assets/icon_calendar.png')
+                      child: Icon(Icons.calendar_month_outlined)
                   ),
                   SizedBox(
                     width: 20,
@@ -156,7 +180,45 @@ class _CalendarPageState extends State<CalendarPage> {
                     ),
                   ),
                 ],
-              )),
+              )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+
+          Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                    top: commonBorderSide(0.5),
+                    bottom: commonBorderSide(0.5),
+                  )),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                      width: 30,
+                      height: 30,
+                      child: Icon(Icons.calendar_month_outlined)
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _memo,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+          ),
+
         ],
       ),
     );
