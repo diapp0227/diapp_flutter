@@ -1,9 +1,16 @@
 import 'package:diapp/model/OnMemory.dart';
+import 'package:diapp/utils/AuthAccess.dart';
+import 'package:diapp/utils/FirebaseSettings.dart';
 import 'package:diapp/view/CalendarWidget.dart';
 import 'package:diapp/view/TabWidget.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseSettings().init();
   runApp(MyApp());
 }
 
