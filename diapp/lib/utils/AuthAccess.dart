@@ -13,18 +13,32 @@ class AuthAccess {
 
   AuthAccess._internal() {}
 
-  Future signIn(String id, String pass) async {
+  // サインイン処理
+  // 引数のID・passwordに対してログイン処理を実施
+  // 戻り値 正常の場合はnull ・異常の場合はエラーコード文字列を返す
+  Future<String?> signIn(String id, String pass) async {
     try {
-      print("signIn: start");
-       await _authInstance.signInWithEmailAndPassword(
+      await _authInstance.signInWithEmailAndPassword(
         email: id,
         password: pass,
       );
-      print("signIn: SUCCESS");
+      return null;
     }
     on FirebaseAuthException catch (e) {
-      print("signIn: ERROR");
-      print("エラーコード: ${ e.code }");
+      print("signIn エラーコード: ${ e.code }");
+      return e.code;
+    }
+  }
+
+  // サインアウト処理
+  // 戻り値 正常の場合はnull ・異常の場合はエラーコード文字列を返す
+  Future signOut() async {
+    try {
+      return await _authInstance.signOut();
+    }
+    on FirebaseAuthException catch (e) {
+      print("signOut エラーコード: ${ e.code }");
+      return e.code;
     }
   }
 }

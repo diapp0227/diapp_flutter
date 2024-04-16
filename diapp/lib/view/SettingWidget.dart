@@ -1,5 +1,6 @@
 import 'package:diapp/utils/AuthAccess.dart';
 import 'package:diapp/utils/FirebaseSettings.dart';
+import 'package:diapp/view/BeforeLoginWidget.dart';
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {
@@ -21,15 +22,9 @@ class _SettingPageState extends State<SettingPage> {
             children: <Widget>[
               InkWell(
                 onTap: () async {
-                  try {
-                  // User Registration
-                  AuthAccess auth = AuthAccess();
-                  await auth.signIn("diapp0227@gmail.com", "hogehoge");
-                  } catch (e) {
-                  // Failed User Information
-                  print("エラーコード: ${ e }");
-                  }
-                },
+                  await AuthAccess().signOut();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BeforeLoginPage()));
+                },// User Registration
                 child:
                 Container(
                     child: Row(
