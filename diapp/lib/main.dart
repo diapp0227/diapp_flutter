@@ -1,6 +1,7 @@
 import 'package:diapp/model/OnMemory.dart';
 import 'package:diapp/utils/AuthAccess.dart';
 import 'package:diapp/utils/FirebaseSettings.dart';
+import 'package:diapp/view/BeforeLoginWidget.dart';
 import 'package:diapp/view/CalendarWidget.dart';
 import 'package:diapp/view/TabWidget.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TabPage(),
+      home: BeforeLoginPage(),
     );
   }
 }
